@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState}  from 'react';
 
 interface Celebrity  {
     id: number
@@ -26,14 +27,13 @@ const celebrities: Celebrity[]= [
      }
 ]
 
-export default function Face_display() {
-    
-    
+export default function Face_display({onClick}) {
+
     return (
       <div>
         {celebrities.map((celeb) =>   
               <tr>
-                <td><img src={celeb.img} alt={celeb.text} height="100px" /></td>
+                <td><button onClick={()=> onClick(celeb)}><img src={celeb.img} alt={celeb.text} height="100px"/></button></td>
                 <td>{celeb.text}</td>
               </tr>
             
@@ -43,3 +43,4 @@ export default function Face_display() {
 
     );
   }
+

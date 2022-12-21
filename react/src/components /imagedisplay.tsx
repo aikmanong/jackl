@@ -1,17 +1,29 @@
 import * as React from "react";
+import {useState}  from 'react';
 import Modal from "./modal/modal";
 
 
-export default class FirstComponent extends React.Component <{}> {
-    render() {
+export default function FirstComponent () {
+
+  // const [changePhoto, setChangePhoto] = useState("");
+  const [photo, setPhoto] = useState(null);
+
+  const handleClick = (celebrity) => {
+    console.log(celebrity);
+    setPhoto(celebrity)
+    console.log('Image clicked');
+  };
+
       return (
         <div>
-          <h3>Will Smith</h3>
-          <img src="https://assets.vogue.com/photos/6226846b921b9eb00286c6ea/master/pass/GettyImages-77731940.jpg" alt="image" width = "200px" height= "300px"/>
+          
+          <h3>{photo.text}</h3>
+          <img src={photo.img} alt="image" width = "200px" height= "300px"
+            />
           <br></br>
-          <Modal />
+          <Modal onImageSelect={handleClick}/>
          
         </div>
       );
-    }
+    
   }
