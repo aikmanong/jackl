@@ -1,29 +1,28 @@
 import * as React from "react";
-import {useState}  from 'react';
+import { useState } from "react";
 import Modal from "./modal/modal";
+import { Celebrity } from "./modal/facedisplay";
+import { celebrities } from "./modal/facedisplay";
 
-
-export default function FirstComponent () {
-
+export default function FirstComponent() {
   // const [changePhoto, setChangePhoto] = useState("");
-  const [photo, setPhoto] = useState(null);
+  const [celeb, setCeleb] = useState<Celebrity>(celebrities[0]);
 
-  const handleClick = (celebrity) => {
-    console.log(celebrity);
-    setPhoto(celebrity)
-    console.log('Image clicked');
+  const handleClick = (celebrity: Celebrity) => {
+    console.log(celebrity.id);
+    setCeleb(celebrity);
+    console.log("Image clicked");
   };
 
-      return (
-        <div>
-          
-          <h3>{photo.text}</h3>
-          <img src={photo.img} alt="image" width = "200px" height= "300px"
-            />
-          <br></br>
-          <Modal onImageSelect={handleClick}/>
-         
-        </div>
-      );
-    
-  }
+  return (
+    <div>
+      <div>
+        <h3>{celeb.text}</h3>
+        <img src={celeb.img} alt="image" width="200px" height="300px" />
+      </div>
+
+      <br></br>
+      <Modal onImageSelect={handleClick} />
+    </div>
+  );
+}

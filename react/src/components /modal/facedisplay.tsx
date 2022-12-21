@@ -1,14 +1,18 @@
 import * as React from 'react';
 import {useState}  from 'react';
 
-interface Celebrity  {
+//celebrity with "export" can be imported
+//C in celeb is capital bc it's a custom type and complex type ( not primitive (object))
+export interface Celebrity  {
     id: number
     img: string
     text: string
 }
 
+
+
 //prevents strings, incomplete objects in the array
-const celebrities: Celebrity[]= [
+export const celebrities: Celebrity[]= [
   { "id": 1,
       "img": "https://assets.vogue.com/photos/6226846b921b9eb00286c6ea/master/pass/GettyImages-77731940.jpg",
       "text": "Will Smith"
