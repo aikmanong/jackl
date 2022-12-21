@@ -31,7 +31,12 @@ export const celebrities: Celebrity[]= [
      }
 ]
 
-export default function Face_display({onClick}) {
+interface Props {
+  //()=> void specify the function and what it will return, void means no return value
+  onClick: (celebrity: Celebrity)=> void ;
+}
+
+export default function FaceDisplay({onClick}:Props) {
 
     return (
       <div>

@@ -2,9 +2,15 @@ import * as React from 'react';
 import {useState}  from 'react';
 import { textSpanIntersectsWithPosition } from 'typescript';
 import "../modal/modal.css";
-import Face_display from './facedisplay';
+import FaceDisplay from './facedisplay';
+import { Celebrity } from "../modal/facedisplay";
 
-export default function Modal({onImageSelect}) {
+interface Props {
+  //()=> void specify the function and what it will return, void means no return value
+ onImageSelect: (celebrity: Celebrity)=> void ;
+}
+
+export default function Modal({onImageSelect}:Props) {
     const [modal, setModal] = useState(false);
 
 
@@ -22,7 +28,7 @@ export default function Modal({onImageSelect}) {
           <div className="overlay"></div>
           <div className="modal-content">
             <h2>Choose a face</h2>
-            <Face_display  onClick={onImageSelect}/>
+            <FaceDisplay  onClick={onImageSelect}/>
             <button className="close-modal" onClick={toggleModal}> CLOSE </button>
           </div>
        </div>
