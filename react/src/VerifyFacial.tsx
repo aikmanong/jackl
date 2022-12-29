@@ -5,7 +5,7 @@ import { FacialDetails } from "./Types";
 const defaultFaceInfo: FacialDetails = {
   verified: undefined,
   distance: 0,
-  max_thresh_hold: 0,
+  threshold: 0,
   model: undefined,
   similarity_metric: undefined,
 };
@@ -15,6 +15,8 @@ const VERIFY_POST_URL = "http://127.0.0.1:8000/verify";
 export const FaceFeatures = () => {
   const [firstImg, setFirstImg] = useState("");
   const [secondImg, setSecondImg] = useState("");
+  const [faceCompare, setFaceData] = useState(defaultFaceInfo);
+
 
   const uploadFirstImgCallback = (
     event: FormEvent<HTMLInputElement> | undefined
@@ -36,13 +38,15 @@ export const FaceFeatures = () => {
         body: JSON.stringify({
           model_name: "VGG-Face",
           img: [
-            { img1: firstImg, img2: secondImg },
-            { img1: firstImg, img2: secondImg },
-            { img1: firstImg, img2: secondImg },
-          ],
+            { img1: firstImg, img2: secondImg }],
         }),
-      }).then(() => {
-        console.log("fetch callback");
+      }).then((response) => {
+        response.json().then((data) => {
+          setFaceData(data.pair_1);
+        });
+      })
+      .catch(() => {
+        console.log("error");
       });
     }
   }, [firstImg, secondImg]);
@@ -51,6 +55,15 @@ export const FaceFeatures = () => {
     <>
       <input onInput={uploadFirstImgCallback} type={"file"} />
       <input onInput={uploadSecondImgCallback} type={"file"} />
+      <div>
+        <img src = {firstImg}></img>
+        <img src = {secondImg}></img>
+        <p>{`verified: ${faceCompare.verified}`}</p>
+        <p>{`distance: ${faceCompare.distance}`}</p>
+        <p>{`max_thresh_hold: ${faceCompare.threshold}`}</p>
+        <p>{`model: ${faceCompare.model}`}</p>
+        <p>{`similarity_metric: ${faceCompare.similarity_metric}`}</p>
+      </div>
     </>
   );
 };
