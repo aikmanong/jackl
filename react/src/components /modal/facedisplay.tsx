@@ -41,7 +41,7 @@ export default function FaceDisplay({onClick}:Props) {
     return (
       <div>
         {celebrities.map((celeb) =>   
-              <tr>
+              <tr key={celeb.id}>
                 <td><button onClick={()=> onClick(celeb)}><img src={celeb.img} alt={celeb.text} height="100px"/></button></td>
                 <td>{celeb.text}</td>
               </tr>
