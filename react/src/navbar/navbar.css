@@ -1,0 +1,19 @@
+.navbar-text {
+  padding-left: var(--bs-navbar-nav-link-padding-x);
+  padding-right: var(--bs-navbar-nav-link-padding-x);
+}
+
+.navbar-text:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--bs-navbar-brand-color);
+}
+
+.navbar-text.selected {
+  color: var(--bs-navbar-brand-color);
+}
+
+.navbar-brand:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
