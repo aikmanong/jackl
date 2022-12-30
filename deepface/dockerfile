@@ -7,4 +7,6 @@ RUN pip install deepface
 RUN apt-get update && \
     apt-get install ffmpeg libsm6 libxext6 -y
 
+RUN pip install flask_cors
+
 COPY . deepface
