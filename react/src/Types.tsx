@@ -6,5 +6,5 @@ export interface IFacialDataProps {
   }
 
 export interface FacialDetails {
-    verified: string | undefined;
+    verified: string
 }
