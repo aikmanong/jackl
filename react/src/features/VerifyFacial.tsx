@@ -7,6 +7,7 @@ const defaultFaceInfo: FacialDetails = {
   verified: "false",
 };
 
+
 const VERIFY_POST_URL = "http://localhost:8000/verify";
 
 export const FaceFeatures = () => {
@@ -38,7 +39,7 @@ export const FaceFeatures = () => {
       })
         .then((response) => {
           response.json().then((data) => {
-            setFaceData(data.pair_1);
+            setFaceData(data.pair_1 as FacialDetails);
           });
         })
         .catch(() => {
