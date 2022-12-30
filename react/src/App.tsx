@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.css";
-import { AnalyzeFacialData } from "./AnalyzeFacialData";
-import { FaceFeatures } from "./VerifyFacial";
+import { AnalyzeFacialData } from "./features/AnalyzeFacialData";
+import { FaceFeatures } from "./features/VerifyFacial";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <AnalyzeFacialData /> */}
-        <FaceFeatures />
+        <AnalyzeFacialData />
+        <FaceFeatures/>
       </header>
     </div>
   );

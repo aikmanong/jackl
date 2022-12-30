@@ -7,8 +7,4 @@ export interface IFacialDataProps {
 
 export interface FacialDetails {
     verified: string | undefined;
-    distance: number | undefined;
-    threshold: number | undefined;
-    model: string | undefined;
-    similarity_metric: string | undefined;
 }
