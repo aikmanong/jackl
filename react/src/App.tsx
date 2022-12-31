@@ -23,7 +23,7 @@ function App() {
         />
       </header>
       {currentSelectedFeature === "analyze" && <AnalyzeFacialData />}
-      <FaceFeatures/>
+      {currentSelectedFeature === "verify" && <FaceFeatures />}
     </div>
   );
 }
