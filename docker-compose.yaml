@@ -10,7 +10,7 @@ services:
   react: 
     build: react/.
     ports: 
-      - "80:3000" 
+      - "3000:3000" 
     volumes: 
       - ./react:/app
-    command: ["yarn", "run", "start"]
+    command: ["sh", "entrypoint.sh"]

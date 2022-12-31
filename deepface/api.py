@@ -7,6 +7,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 #------------------------------
 
 from flask import Flask, jsonify, request, make_response
+from flask_cors import CORS
 
 import argparse
 import uuid
@@ -32,6 +33,7 @@ from deepface import DeepFace
 #------------------------------
 
 app = Flask(__name__)
+CORS(app) # This will enable CORS for all routes
 
 #------------------------------
 

@@ -5,6 +5,13 @@ export interface IFacialDataProps {
     dominant_race: string | undefined;
   }
 
+export type AvailableFeatures =
+  | "home"
+  | "analyze"
+  | "verify"
+  | "find"
+  | "streaming";
+
 export interface FacialDetails {
     verified: string
-}
+  }
