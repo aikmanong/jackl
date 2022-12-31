@@ -13,4 +13,4 @@ services:
       - "3000:3000" 
     volumes: 
       - ./react:/app
-    command: ["sh", "entrypoint.sh"]
+    command: ["./entrypoint.sh"]
