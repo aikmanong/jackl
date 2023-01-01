@@ -25,7 +25,7 @@ export const celebrities: Celebrity[]= [
     "img": "https://www.boredpanda.com/blog/wp-content/uploads/2018/08/nicest-celebrity-encounters-101-5b7bd05e94295__700.jpg",
     "text": "Robin Williams"
      },
-     { "id": 3,
+     { "id": 4,
     "img": "https://i2-prod.mirror.co.uk/incoming/article25219228.ece/ALTERNATES/s1200b/0_EHP_CHP_141021Gordon-Ramsay-_58659.jpg",
     "text": "Gordan Ramsay"
      }
@@ -40,13 +40,13 @@ export default function FaceDisplay({onClick}:Props) {
 
     return (
       <div>
-        {celebrities.map((celeb) =>   
-              <tr key={celeb.id}>
+        {celebrities.map((celeb) => 
+          <tbody key={celeb.id}>
+              <tr>
                 <td><button onClick={()=> onClick(celeb)}><img src={celeb.img} alt={celeb.text} height="100px"/></button></td>
                 <td>{celeb.text}</td>
               </tr>
-            
-            
+           </tbody>  
           )}
         </div>
 

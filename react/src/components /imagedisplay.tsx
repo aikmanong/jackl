@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Modal from "./modal/modal";
 import { Celebrity } from "./modal/facedisplay";
 import { celebrities } from "./modal/facedisplay";
-import { convertUrlToBase64 } from "./converturl";
+// import { convertUrlToBase64 } from "./converturl";
 import { resolve } from "node:path/win32";
 import { rejects } from "node:assert";
 
@@ -26,11 +26,11 @@ export default function FirstComponent() {
   //   convertUrlToBase64(event, setUrlTo64);
   // };
 
-  const ANALYZE_POST_URL = "http://127.0.0.1:8000/analyze";
+  const ANALYZE_POST_URL = "http://127.0.0.1:8000/verify";
 
   //function signiture and then function call
   const urlToBase64 = (url: string) =>
-    fetch("https://cors-anywhere.herokuapp.com/" + url)
+    fetch(url)
       .then((response) => response.blob())
       //convert image in memory into blob
       .then(
@@ -51,7 +51,15 @@ export default function FirstComponent() {
       fetch(ANALYZE_POST_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ img: [base64] }),
+        body: JSON.stringify({ 
+          img: 
+          [
+            {
+              img1:base64,
+              img2:base64,
+            }
+          ] 
+        }),
       }).then((response) => {
         response.json().then((data) => {
           setImage(data.instance_1);
