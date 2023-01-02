@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
-import { AnalyzeFacialData } from "./AnalyzeFacialData";
+import { AnalyzeFacialData } from "./features/AnalyzeFacialData";
 import { NavBar } from "./navbar/navbar";
 import { AvailableFeatures } from "./Types";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FaceFeatures } from "./features/VerifyFacial";
 
 function App() {
   const [currentSelectedFeature, setCurrentSelectedFeature] =
@@ -22,6 +23,7 @@ function App() {
         />
       </header>
       {currentSelectedFeature === "analyze" && <AnalyzeFacialData />}
+      {currentSelectedFeature === "verify" && <FaceFeatures />}
     </div>
   );
 }
