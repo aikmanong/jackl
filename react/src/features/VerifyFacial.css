@@ -1,0 +1,11 @@
+.verified {
+    border: 5px solid rgba(0, 256, 0, 0.75);
+    width: 500px;
+    height: 500px;
+}
+
+.not-verified {
+    border: 5px solid rgba(256, 0, 0, 0.75);
+    width: 500px;
+    height: 500px; 
+}

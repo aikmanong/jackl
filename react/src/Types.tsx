@@ -1,9 +1,9 @@
 export interface IFacialDataProps {
-  age: number;
-  dominant_emotion: string | undefined;
-  gender: string | undefined;
-  dominant_race: string | undefined;
-}
+    age: number;
+    dominant_emotion: string | undefined;
+    gender: string | undefined;
+    dominant_race: string | undefined;
+  }
 
 export type AvailableFeatures =
   | "home"
@@ -11,3 +11,7 @@ export type AvailableFeatures =
   | "verify"
   | "find"
   | "streaming";
+
+export interface FacialDetails {
+    verified: string
+  }

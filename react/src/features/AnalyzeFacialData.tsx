@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useRef, useState } from "react";
-import { convertImgToBase64String } from "./utils";
-import { IFacialDataProps } from "./Types";
+import { convertImgToBase64String } from "../utils";
+import { IFacialDataProps } from "../Types";
 
 const defaultFacialData: IFacialDataProps = {
   age: 0,
@@ -42,6 +42,7 @@ export const AnalyzeFacialData = () => {
     <>
       <input onInput={uploadImageCallback} type={"file"} />
       <div>
+        <img src={imgBinaryString}></img>
         <p>{`age: ${facialData.age}`}</p>
         <p>{`dominant emotion: ${facialData.dominant_emotion}`}</p>
         <p>{`gender: ${facialData.gender}`}</p>
