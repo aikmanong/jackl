@@ -9,7 +9,7 @@ const defaultFacialData: IFacialDataProps = {
   dominant_race: undefined,
 };
 
-const ANALYZE_POST_URL = "http://127.0.0.1:8000/analyze";
+const ANALYZE_POST_URL = "http://localhost:8000/analyze";
 
 export const AnalyzeFacialData = () => {
   const [imgBinaryString, setImgBinaryString] = useState("");
