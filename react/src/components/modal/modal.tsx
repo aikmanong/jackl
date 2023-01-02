@@ -21,16 +21,16 @@ export default function Modal({onImageSelect}:Props) {
 
     return (
       <div>
-          <button onClick={toggleModal} className="btn-modal"> Choose..</button>
+          <button onClick={toggleModal} className="btn-modal-face-picker"> Choose..</button>
           
 
         {modal && (
-          <div className="modal">
-          <div className="overlay"></div>
-          <div className="modal-content">
+          <div className="modal-face-picker">
+          <div className="overlay-face-picker"></div>
+          <div className="modal-content-face-picker">
             <h2>Choose a face</h2>
             <FaceDisplay  onClick={onImageSelect}/>
-            <button className="close-modal" onClick={toggleModal}> CLOSE </button>
+            <button className="close-modal-face-picker" onClick={toggleModal}> CLOSE </button>
           </div>
        </div>
         )}
