@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import FirstComponent from "./components /imagedisplay";
+import FirstComponent from "./components/imagedisplay";
 import { AnalyzeFacialData } from "./features/AnalyzeFacialData";
 import { NavBar } from "./navbar/navbar";
 import { AvailableFeatures } from "./Types";
@@ -17,14 +17,14 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello World</h1>
-      <FirstComponent />
       <header className="App-header">
         <NavBar
           currentSelectedFeature={currentSelectedFeature}
           handleFeatureChange={handleFeatureChange}
         />
       </header>
+      <FirstComponent />
+
       {currentSelectedFeature === "analyze" && <AnalyzeFacialData />}
       {currentSelectedFeature === "verify" && <FaceFeatures />}
     </div>

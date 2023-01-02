@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import {useState}  from 'react';
 import { textSpanIntersectsWithPosition } from 'typescript';
-import "../modal/modal.css";
+import "./modal.css";
 import FaceDisplay from './facedisplay';
-import { Celebrity } from "../modal/facedisplay";
+import { Celebrity } from "./facedisplay";
 
 interface Props {
   //()=> void specify the function and what it will return, void means no return value
@@ -22,6 +22,7 @@ export default function Modal({onImageSelect}:Props) {
     return (
       <div>
           <button onClick={toggleModal} className="btn-modal"> Choose..</button>
+          
 
         {modal && (
           <div className="modal">

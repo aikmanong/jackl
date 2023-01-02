@@ -39,7 +39,7 @@ interface Props {
 export default function FaceDisplay({onClick}:Props) {
 
     return (
-      <div>
+      <table>
         {celebrities.map((celeb) => 
           <tbody key={celeb.id}>
               <tr>
@@ -48,7 +48,7 @@ export default function FaceDisplay({onClick}:Props) {
               </tr>
            </tbody>  
           )}
-        </div>
+        </table>
 
     );
   }
