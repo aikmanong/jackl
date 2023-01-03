@@ -1,12 +1,11 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import { convertImgToBase64String } from "../utils";
-import { FacialDetails } from "../Types";
+import { convertImgToBase64String } from "../../utils/utils";
+import { FacialDetails } from "../../types/Types";
 import "./VerifyFacial.css";
 
 const defaultFaceInfo: FacialDetails = {
   verified: "false",
 };
-
 
 const VERIFY_POST_URL = "http://localhost:8000/verify";
 
@@ -55,16 +54,22 @@ export const FaceFeatures = () => {
       <input onInput={uploadImgCallback} type={"file"} />
       <input onInput={uploadImgCallback2} type={"file"} />
       <div>
-        {firstImg && secondImg &&<img
-          className={faceCompare.verified ? "verified" : "not-verified"}
-          src={firstImg}
-        ></img>}
-        {firstImg && secondImg &&<img
-          className={faceCompare.verified ? "verified" : "not-verified"} 
-          src={secondImg}
-        ></img>}
-        
-        {firstImg && secondImg &&<p>{`Same person? ${faceCompare.verified}`}</p>}
+        {firstImg && secondImg && (
+          <img
+            className={faceCompare.verified ? "verified" : "not-verified"}
+            src={firstImg}
+          ></img>
+        )}
+        {firstImg && secondImg && (
+          <img
+            className={faceCompare.verified ? "verified" : "not-verified"}
+            src={secondImg}
+          ></img>
+        )}
+
+        {firstImg && secondImg && (
+          <p>{`Same person? ${faceCompare.verified}`}</p>
+        )}
       </div>
     </>
   );
