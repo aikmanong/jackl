@@ -1,0 +1,22 @@
+FROM node:16-alpine
+
+LABEL author jackl_ventures
+
+WORKDIR /app
+
+COPY . .
+
+# === BUILD ====
+
+RUN npm ci
+
+RUN apk update && \
+    apk upgrade && \
+    apk add bash
+
+RUN yarn install
+
+# === RUN ===
+EXPOSE 3000
+CMD [ "yarn", "run", "start"]
+

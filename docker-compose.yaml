@@ -7,3 +7,10 @@ services:
     volumes: 
       - ./deepface:/deepface
     command: python /deepface/api.py
+  react: 
+    build: react/.
+    ports: 
+      - "3000:3000" 
+    volumes: 
+      - ./react:/app
+    command: ["bash", "entrypoint.sh"]

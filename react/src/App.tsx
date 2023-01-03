@@ -1,24 +1,29 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
+import { AnalyzeFacialData } from "./features/analyze/AnalyzeFacialData";
+import { NavBar } from "./navbar/navbar";
+import { AvailableFeatures } from "./types/Types";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { FaceFeatures } from "./features/verify/VerifyFacial";
 
 function App() {
+  const [currentSelectedFeature, setCurrentSelectedFeature] =
+    useState<AvailableFeatures>("home");
+
+  const handleFeatureChange = (selectedFeature: AvailableFeatures): void => {
+    setCurrentSelectedFeature(selectedFeature);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <NavBar
+          currentSelectedFeature={currentSelectedFeature}
+          handleFeatureChange={handleFeatureChange}
+        />
       </header>
+      {currentSelectedFeature === "analyze" && <AnalyzeFacialData />}
+      {currentSelectedFeature === "verify" && <FaceFeatures />}
     </div>
   );
 }
