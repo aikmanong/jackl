@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useRef, useState } from "react";
-import { convertImgToBase64String } from "../utils";
-import { IFacialDataProps } from "../Types";
+import { convertImgToBase64String } from "../../utils/utils";
+import { IFacialDataProps } from "../../types/Types";
 
 const defaultFacialData: IFacialDataProps = {
   age: 0,
