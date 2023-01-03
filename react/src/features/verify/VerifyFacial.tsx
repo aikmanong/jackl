@@ -47,11 +47,10 @@ export const FaceFeatures = () => {
           } else {
             response.json().then((data) => {
               const facialComparisonData = data.pair_1 as FacialDetails;
-              if (facialComparisonData.verified) {
-                setLoadingState("verified");
-              } else {
-                setLoadingState("not-verified");
-              }
+              facialComparisonData.verified
+                ? setLoadingState("verified")
+                : setLoadingState("not-verified");
+
               setFacialComparisonData(facialComparisonData);
             });
           }
