@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { convertImgToBase64String } from "../../utils/utils";
-import { FacialDetails } from "../../types/Types";
+import { currentLoadingState, FacialDetails } from "../../types/Types";
 import "./VerifyFacial.css";
 
 const defaultFaceInfo: FacialDetails = {
@@ -12,7 +12,10 @@ const VERIFY_POST_URL = "http://localhost:8000/verify";
 export const FaceFeatures = () => {
   const [firstImg, setFirstImg] = useState("");
   const [secondImg, setSecondImg] = useState("");
-  const [faceCompare, setFaceData] = useState(defaultFaceInfo);
+  const [facialComparisonData, setFacialComparisonData] =
+    useState(defaultFaceInfo);
+  const [loadingState, setLoadingState] =
+    useState<currentLoadingState>("not-loading");
 
   const uploadImgCallback = (
     event: FormEvent<HTMLInputElement> | undefined
@@ -28,6 +31,7 @@ export const FaceFeatures = () => {
 
   useEffect(() => {
     if (firstImg && secondImg) {
+      setLoadingState("loading");
       fetch(VERIFY_POST_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -37,13 +41,25 @@ export const FaceFeatures = () => {
         }),
       })
         .then((response) => {
-          response.json().then((data) => {
-            setFaceData(data.pair_1 as FacialDetails);
-          });
+          if (!response.ok) {
+            setLoadingState("loading-error");
+            console.error(`${response.status} status - ${response.statusText}`);
+          } else {
+            response.json().then((data) => {
+              const facialComparisonData = data.pair_1 as FacialDetails;
+              facialComparisonData.verified
+                ? setLoadingState("verified")
+                : setLoadingState("not-verified");
+
+              setFacialComparisonData(facialComparisonData);
+            });
+          }
         })
-        .catch(() => {
-          console.log(
-            "Couldn't correctly compare the two images, unusual error"
+        .catch((error) => {
+          setLoadingState("loading-error");
+          console.error(
+            "Couldn't correctly compare the two images, unusual error",
+            error
           );
         });
     }
@@ -53,24 +69,17 @@ export const FaceFeatures = () => {
     <>
       <input onInput={uploadImgCallback} type={"file"} />
       <input onInput={uploadImgCallback2} type={"file"} />
-      <div>
-        {firstImg && secondImg && (
-          <img
-            className={faceCompare.verified ? "verified" : "not-verified"}
-            src={firstImg}
-          ></img>
-        )}
-        {firstImg && secondImg && (
-          <img
-            className={faceCompare.verified ? "verified" : "not-verified"}
-            src={secondImg}
-          ></img>
-        )}
-
-        {firstImg && secondImg && (
-          <p>{`Same person? ${faceCompare.verified}`}</p>
-        )}
-      </div>
+      {firstImg && secondImg && (
+        <div className={`verify-facial-image-container ${loadingState}`}>
+          <img src={firstImg}></img>
+          <img src={secondImg}></img>
+          {loadingState === "loading" && <p>loading...</p>}
+          {(loadingState === "verified" || loadingState === "not-verified") && (
+            <p>{`Same person? ${facialComparisonData.verified}`}</p>
+          )}
+          {loadingState === "loading-error" && <p>loading error</p>}
+        </div>
+      )}
     </>
   );
 };
