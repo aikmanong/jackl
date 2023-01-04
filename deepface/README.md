@@ -22,26 +22,43 @@ To have a video rundown of DeepFace, refer to this [video](https://www.youtube.c
 
 This project utilizies the software platform [Docker](https://www.docker.com/)
 
-## What is Docker
+## Running Docker Without the Service
 
-Docker is a software service platoform where it simplifies the process of building, running, and managing applications. Docker does this by creating containers where containers packages code and their dependicies so the applicaiton can run efficiently across all computing environments.
+In order to run the build without the service, it is necessary to first create the Dockerfile. To do that, in a new file, write
 
-## Building Docker
+```
+FROM python:3.8
 
-In order to build a container within docker, run the command "$ docker build [OPTIONS] PATH | URL".
+RUN pip install deepface
 
-In this command, "PATH" refers to the specific location of files for the "context" of the build and "URL" refers to a link to the "context of the build". This command can use either of these "context" to build the container. To build a container a specific way, refer to other [OPTIONS](https://docs.docker.com/engine/reference/commandline/build/#tag-an-image--t)
+RUN apt-get update && \
+    apt-get install ffmpeg libsm6 libxext6 -y
 
-It is also possible to copy a specific file if one wants to copy only one file. In order to do this, follow the prompt **COPY --from**, where "**from**" is the specific file you want to copy.
+RUN pip install flask_cors
 
-## Running Docker
+COPY . deepface
+```
 
-One way to run Docker with a program, is to write "docker compose up -d" within the terminal to open the Docker container.
+After creating this new file, in the terminal, run the command
+
+```
+docker run --detach --name JACL IMAGE -f /dev/null
+
+docker build --tag myJACL-fm .
+
+docker run --detach --name JACL myJACL-fpm
+```
+
+In this command, **IMAGE** is the specific image you want to run into the container.
+
+After completing these commands, you should be able to run the container with the image.
+
+## Running Docker with the Service
+
+One way to run Docker with a program is to write the command below within the terminal
+
+```
+docker run --hostname author jackl_venture
+```
 
 Another way to open a Docker container is to open the specific containers within the Docker app while running a program.
-
-## Learn More
-
-To learn more about how to build Docker containers, refer to these [instructions](https://docs.docker.com/engine/reference/commandline/build/#tag-an-image--t).
-
-To learn more about Docker and terminals codes assoicated with Docker, refer to this [website here](https://docs.docker.com/engine/reference/commandline/cli/).
