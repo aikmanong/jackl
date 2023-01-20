@@ -3,7 +3,7 @@ services:
   deepface: 
     build: deepface/.
     ports: 
-      - "8000:5000" 
+      - "8080:5000" 
     volumes: 
       - ./deepface:/deepface
     command: python /deepface/api.py

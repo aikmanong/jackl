@@ -6,6 +6,7 @@ import { celebrities } from "./modal/facedisplay";
 // import { convertUrlToBase64 } from "./converturl";
 import { resolve } from "node:path/win32";
 import { rejects } from "node:assert";
+import Dropzone from "./modal/dropzone";
 
 export default function FirstComponent() {
   // const [changePhoto, setChangePhoto] = useState("");
@@ -13,6 +14,7 @@ export default function FirstComponent() {
   const [urlTo64, setUrlTo64] = useState("");
   const [image, setImage] = useState(celebrities[0]);
   const isMounted = useRef(false);
+  const [file, setFile] = useState<File|null>(null); 
 
   const handleClick = (celebrity: Celebrity) => {
     console.log(celebrity.id, celebrity.img);
@@ -81,6 +83,15 @@ export default function FirstComponent() {
 
       <br></br>
       <Modal onImageSelect={handleClick} />
+
+      <Dropzone  setFile={setFile}/>
+      
+      
+        {file?.name}
+      
+      
+
+
     </div>
   );
 }
