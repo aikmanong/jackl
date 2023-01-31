@@ -12,7 +12,7 @@
     width: 100px;
 } 
 
-/* .box-drag_drop .border-red-500{
+.box-drag_drop .border-red-500{
     border: 1px solid red;  
     margin: 20px;
     height: 200px;
@@ -20,7 +20,7 @@
     align-self: center;
     color:black; 
 }
-
+/* 
 .box-drag_drop .border-green-500{
     border: 1px solid green;  
     margin: 20px;
@@ -28,4 +28,8 @@
     width: 50%;
     align-self: center;
     color:black; 
-} */
+}  */
+
+.sorry_red{
+    border: 1px solid red; 
+}

@@ -87,8 +87,8 @@ export default function FirstComponent() {
       <Dropzone  setFile={setFile}/>
       
       
-        {file?.name}
-      
+       {file?.name} 
+       {/* {file?.lastModified} */}
       
 
 

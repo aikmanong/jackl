@@ -8,6 +8,7 @@ const Dropzone = ({setFile}: {setFile:(f:File)=> void}) => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     console.log(acceptedFiles);
     setFile(acceptedFiles[0]);
+
   }, []);
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject } =
@@ -19,6 +20,8 @@ const Dropzone = ({setFile}: {setFile:(f:File)=> void}) => {
       },
     });
 
+
+
   return (
     <div className="p-4">
       <div {...getRootProps()} className="drag_drop">
@@ -26,10 +29,10 @@ const Dropzone = ({setFile}: {setFile:(f:File)=> void}) => {
 
         <div className="box-drag_drop">
 
-        {/* <div className={"box-drag_drop"
-          + (isDragReject === true ? "border-red-500": "")
-          + (isDragAccept === true ? "border-green-500": "")
-  }> */}
+        {/* <div className={"box-drag_drop" +
+           (isDragReject === true ? "border-red-500": "") 
+           + (isDragAccept === true ? "border-green-500": "")
+  }/> */}
           <img src={folder} alt="folder" className="h-4 w-4" />
 
           {isDragReject ? (
@@ -38,6 +41,7 @@ const Dropzone = ({setFile}: {setFile:(f:File)=> void}) => {
             <div>
               <p>Drag and Drop Files Here </p>
               <p className="mt-2 text base text-gray-300">Only jpeg and png </p>
+
             </div>
           )}
         </div>
