@@ -14,7 +14,8 @@ export default function FirstComponent() {
   const [urlTo64, setUrlTo64] = useState("");
   const [image, setImage] = useState(celebrities[0]);
   const isMounted = useRef(false);
-  const [file, setFile] = useState<File|null>(null); 
+  const [file, setFile] = useState<File|null>(null);
+  const [preview, setPreview] = useState<string|null>(null)
 
   const handleClick = (celebrity: Celebrity) => {
     console.log(celebrity.id, celebrity.img);
@@ -70,9 +71,24 @@ export default function FirstComponent() {
     });} else {
       isMounted.current = true;
     }
-  }, [celeb]);
+  }, [celeb]); //second argument is depedency array , when ever variable is change then useeffect is triggered
 
   //convert image to base64 manually
+
+useEffect(()=> { //run when [file] changes
+  const reader = new FileReader();
+
+  reader.addEventListener("load", () => {
+    setPreview(reader.result as string);
+  }, false);
+
+  if(file) {
+    reader.readAsDataURL(file);
+  }
+
+}, [file])
+//set the reult of the reader as my preview value
+
 
   return (
     <div>
@@ -87,7 +103,8 @@ export default function FirstComponent() {
       <Dropzone  setFile={setFile}/>
       
       
-       {file?.name} 
+       {file?.name}
+       {preview===null? "" : <img src ={preview}/>}
        {/* {file?.lastModified} */}
       
 
