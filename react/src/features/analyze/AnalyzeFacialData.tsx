@@ -1,6 +1,7 @@
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { convertImgToBase64String } from "../../utils/utils";
 import { IFacialDataProps } from "../../types/Types";
+import { Spotify } from "../spotify/Spotify";
 
 const defaultFacialData: IFacialDataProps = {
   age: 0,
@@ -48,6 +49,10 @@ export const AnalyzeFacialData = () => {
         <p>{`gender: ${facialData.gender}`}</p>
         <p>{`dominant race: ${facialData.dominant_race}`}</p>
       </div>
+      <br />
+      <br />
+      <br />
+      <Spotify emotion={facialData.dominant_emotion} />
     </>
   );
 };
