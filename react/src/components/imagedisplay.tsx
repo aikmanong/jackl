@@ -103,8 +103,9 @@ useEffect(()=> { //run when [file] changes
       <Dropzone  setFile={setFile}/>
       
       
+       
+       {preview===null? "" : <img className="uploadedImg" src ={preview}/>}
        {file?.name}
-       {preview===null? "" : <img src ={preview}/>}
        {/* {file?.lastModified} */}
       
 

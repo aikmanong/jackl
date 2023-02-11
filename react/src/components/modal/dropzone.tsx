@@ -27,10 +27,6 @@ const Dropzone = ({setFile}: {setFile:(f:File)=> void}) => {
 
         <div className="box-drag_drop">
 
-        {/* <div className={"box-drag_drop" +
-           (isDragReject === true ? "border-red-500": "") 
-           + (isDragAccept === true ? "border-green-500": "")
-  }/> */}
           <img src={folder} alt="folder" className="h-4 w-4" />
 
           {isDragReject ? (
@@ -45,23 +41,7 @@ const Dropzone = ({setFile}: {setFile:(f:File)=> void}) => {
       </div>
     </div>
 
-    // <div className="p-4">
-    //   <div {...getRootProps()}>
-    //     <input {...getInputProps()} />
-    //     <div>
-    //       <img src={folder} alt="folder" className="h-16 w-16" />
 
-    //       {isDragReject ? (
-    //         <p>Sorry, this format is not accepted</p>
-    //       ) : (
-    //         <div>
-    //           <p>Drag and Drop Files Here </p>
-    //           <p className="mt-2 text base text-gray-300">Only jpeg and png </p>
-    //         </div>
-    //       )}
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
