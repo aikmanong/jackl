@@ -106,7 +106,7 @@ useEffect(()=> { //run when [file] changes
        
        {preview===null? "" : <img className="uploadedImg" src ={preview}/>}
        {file?.name}
-       {/* {file?.lastModified} */}
+
       
 
 

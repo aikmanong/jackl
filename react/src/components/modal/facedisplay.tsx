@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {useState}  from 'react';
+import {useState, useEffect}  from 'react';
+import Dropzone from "../modal/dropzone";
 
 //celebrity with "export" can be imported
 //C in celeb is capital bc it's a custom type and complex type ( not primitive (object))
@@ -37,18 +38,43 @@ interface Props {
 }
 
 export default function FaceDisplay({onClick}:Props) {
+const [file, setFile] = useState<File|null>(null);
+const [preview, setPreview] = useState<string|null>(null)
+
+
+useEffect(()=> { //run when [file] changes
+  const reader = new FileReader();
+
+  reader.addEventListener("load", () => {
+    setPreview(reader.result as string);
+  }, false);
+
+  if(file) {
+    reader.readAsDataURL(file);
+  }
+
+}, [file])
+//set the reult of the reader as my preview value
+
 
     return (
+      
       <table>
         {celebrities.map((celeb) => 
           <tbody key={celeb.id}>
               <tr>
                 <td><button onClick={()=> onClick(celeb)}><img src={celeb.img} alt={celeb.text} height="100px"/></button></td>
                 <td>{celeb.text}</td>
+                
               </tr>
-           </tbody>  
+          
+           </tbody>
+            
           )}
-        </table>
+           <button>{preview===null? "" : <img className="uploadedImg" src ={preview}/>} </button>
+           {file?.name}
+           <Dropzone  setFile={setFile}/>
+      </table>
 
     );
   }
