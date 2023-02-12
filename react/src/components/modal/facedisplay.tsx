@@ -71,7 +71,7 @@ useEffect(()=> { //run when [file] changes
            </tbody>
             
           )}
-           <button>{preview===null? "" : <img className="uploadedImg" src ={preview}/>} </button>
+           {preview===null? "" : <button> <img className="uploadedImg" src ={preview}/></button> } 
            {file?.name}
            <Dropzone  setFile={setFile}/>
       </table>

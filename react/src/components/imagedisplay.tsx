@@ -98,6 +98,7 @@ useEffect(()=> { //run when [file] changes
       </div>
 
       <br></br>
+{/* //can delete when ready */}
       <Modal onImageSelect={handleClick} />
 
       <Dropzone  setFile={setFile}/>
