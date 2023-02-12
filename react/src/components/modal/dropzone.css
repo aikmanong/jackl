@@ -2,8 +2,9 @@
    color:black; 
    border: 1px solid blue;
    margin: 20px;
+   padding-bottom: 20px;
    height: 200px;
-  width: 50%;
+  width: 100%;
   align-self: center;
 }
 
@@ -37,4 +38,8 @@
 .uploadedImg{
     height: 100px;
     width: 100px;
+}
+
+.onlyJpegPngText{
+    padding-bottom: 10px;
 }

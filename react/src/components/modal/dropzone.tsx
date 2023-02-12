@@ -34,7 +34,7 @@ const Dropzone = ({setFile}: {setFile:(f:File)=> void}) => {
           ) : (
             <div>
               <p>Drag and Drop Files Here </p>
-              <p className="mt-2 text base text-gray-300">Only jpeg and png </p>
+              <p className="onlyJpegPngText">Only jpeg and png </p>
             </div>
           )}
         </div>
