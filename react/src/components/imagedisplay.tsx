@@ -73,7 +73,6 @@ export default function FirstComponent() {
     }
   }, [celeb]); //second argument is depedency array , when ever variable is change then useeffect is triggered
 
-  //convert image to base64 manually
 
 useEffect(()=> { //run when [file] changes
   const reader = new FileReader();
@@ -101,10 +100,8 @@ useEffect(()=> { //run when [file] changes
 {/* //can delete when ready */}
       <Modal onImageSelect={handleClick} />
 
-      <Dropzone  setFile={setFile}/>
-      
-      
-       
+      <Dropzone  setFile={setFile}/>    
+      {/* <Dropzone  setFile={setFile}/>      */}
        {preview===null? "" : <img className="uploadedImg" src ={preview}/>}
        {file?.name}
 

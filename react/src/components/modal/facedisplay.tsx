@@ -7,8 +7,10 @@ import Dropzone from "../modal/dropzone";
 export interface Celebrity  {
     id: number
     img: string
-    text: string
+    text: string | undefined
 }
+
+
 
 
 
@@ -60,20 +62,24 @@ useEffect(()=> { //run when [file] changes
     return (
       
       <table>
-        {celebrities.map((celeb) => 
-          <tbody key={celeb.id}>
-              <tr>
+        <tbody>
+         {celebrities.map((celeb) => 
+          
+              <tr key={celeb.id}>
                 <td><button onClick={()=> onClick(celeb)}><img src={celeb.img} alt={celeb.text} height="100px"/></button></td>
                 <td>{celeb.text}</td>
                 
               </tr>
-          
-           </tbody>
-            
           )}
-           {preview===null? "" : <button> <img className="uploadedImg" src ={preview}/></button> } 
-           {file?.name}
-           <Dropzone  setFile={setFile}/>
+            <tr>
+              <td>{preview===null? "" : <button  onClick={()=> onClick({id:0, img:preview, text:file?.name})}> <img className="uploadedImg" src ={preview} alt={file?.name}/></button> } </td>
+              <td>{file?.name}</td>
+            </tr>
+            <tr>
+              <td><Dropzone  setFile={setFile}/></td>
+            </tr>
+          </tbody>
+           
       </table>
 
     );
