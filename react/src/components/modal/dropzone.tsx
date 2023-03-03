@@ -4,16 +4,30 @@ import { useDropzone } from "react-dropzone";
 import folder from "./dropzone_img/folder.png";
 import "./dropzone.css";
 
-const Dropzone = ({setFile}: {setFile:(f:File)=> void}) => {
+const Dropzone = ({setFile}: {setFile:(f:File[])=> void}) => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     console.log(acceptedFiles);
-    setFile(acceptedFiles[0]);
+    setFile(acceptedFiles);
   }, []);
+
+// interface Props {
+//  acceptedFiles: File[],
+//  setFile: (f: File) => void,
+// }
+
+
+//   const Dropzone = ({setFile}: {setFile:(f:File[])=> void}) => {
+//     const onDrop = useCallback((acceptedFiles: File[]) => {
+//       const mappedAcc = acceptedFiles.map(file => ({file }));
+      
+//       setFile((acceptedFiles) => [...acceptedFiles, ...mappedAcc]);
+//     }, []);
+
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject } =
     useDropzone({
       onDrop,
-      multiple: false,
+      multiple: true,
       accept: {
         "image/*": [".png", ".jpeg", ".jpg"],
       },

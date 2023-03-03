@@ -14,8 +14,8 @@ export default function FirstComponent() {
   const [urlTo64, setUrlTo64] = useState("");
   const [image, setImage] = useState(celebrities[0]);
   const isMounted = useRef(false);
-  const [file, setFile] = useState<File|null>(null);
-  const [preview, setPreview] = useState<string|null>(null)
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
 
   const handleClick = (celebrity: Celebrity) => {
     console.log(celebrity.id, celebrity.img);
@@ -48,46 +48,48 @@ export default function FirstComponent() {
       );
 
   useEffect(() => {
-    if (isMounted.current){
-    urlToBase64(celeb.img).then((base64) => {
-      // console.log("Result:", base64);
-      fetch(ANALYZE_POST_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          img: 
-          [
-            {
-              img1:base64,
-              img2:base64,
-            }
-          ] 
-        }),
-      }).then((response) => {
-        response.json().then((data) => {
-          setImage(data.instance_1);
+    if (isMounted.current) {
+      urlToBase64(celeb.img).then((base64) => {
+        // console.log("Result:", base64);
+        fetch(ANALYZE_POST_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            img: [
+              {
+                img1: base64,
+                img2: base64,
+              },
+            ],
+          }),
+        }).then((response) => {
+          response.json().then((data) => {
+            setImage(data.instance_1);
+          });
         });
       });
-    });} else {
+    } else {
       isMounted.current = true;
     }
   }, [celeb]); //second argument is depedency array , when ever variable is change then useeffect is triggered
 
+  useEffect(() => {
+    //run when [file] changes
+    const reader = new FileReader();
 
-useEffect(()=> { //run when [file] changes
-  const reader = new FileReader();
+    reader.addEventListener(
+      "load",
+      () => {
+        setPreview(reader.result as string);
+      },
+      false
+    );
 
-  reader.addEventListener("load", () => {
-    setPreview(reader.result as string);
-  }, false);
-
-  if(file) {
-    reader.readAsDataURL(file);
-  }
-
-}, [file])
-//set the reult of the reader as my preview value
-
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }, [file]);
+  //set the reult of the reader as my preview value
 
   return (
     <div>
@@ -95,19 +97,8 @@ useEffect(()=> { //run when [file] changes
         <h3>{celeb.text}</h3>
         <img src={celeb.img} alt="image" width="200px" height="300px" />
       </div>
-
       <br></br>
-{/* //can delete when ready */}
       <Modal onImageSelect={handleClick} />
-
-      <Dropzone  setFile={setFile}/>    
-      {/* <Dropzone  setFile={setFile}/>      */}
-       {preview===null? "" : <img className="uploadedImg" src ={preview}/>}
-       {file?.name}
-
-      
-
-
     </div>
   );
 }
