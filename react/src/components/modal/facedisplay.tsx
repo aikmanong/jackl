@@ -8,7 +8,6 @@ export interface Celebrity {
   id: number;
   img: string;
   text: string | undefined;
-  
 }
 
 //prevents strings, incomplete objects in the array
@@ -59,14 +58,24 @@ export default function FaceDisplay({ onClick }: Props) {
             },
             false
           );
-          reader.readAsDataURL(files[i])
+          reader.readAsDataURL(files[i]);
+
         })
-      );      
+      );
     }
-    Promise.all(previewPromises).then((personPhotos)=> {
+    Promise.all(previewPromises).then((personPhotos) => {
       setPreviews(personPhotos);
-    })
+    });
   }, [files]);
+
+
+  const allFilesUploaded = (uploadedFiles: File[]) => {
+    setFiles ((previousFiles) => ([...previousFiles, ...uploadedFiles]))
+  }
+
+  //setter function with new value and callback
+  //callback(all in blue parenth) 1st argument is the previous value of that state (previousFiles)
+  //callback makes sure previous files updated to have new values 
 
   return (
     <table>
@@ -81,9 +90,9 @@ export default function FaceDisplay({ onClick }: Props) {
             <td>{celeb.text}</td>
           </tr>
         ))}
-        {files?.map((file,index) => (
-          <>
-            <tr>
+        {files?.map((file, index) => (
+          
+            <tr key={index}>
               <td>
                 {previews === null ? (
                   ""
@@ -104,12 +113,12 @@ export default function FaceDisplay({ onClick }: Props) {
               </td>
               <td>{file.name}</td>
             </tr>
-          </>
+          
         ))}
 
         <tr>
           <td>
-            <Dropzone setFile={setFiles} />
+            <Dropzone setFile={allFilesUploaded} />
           </td>
         </tr>
       </tbody>
