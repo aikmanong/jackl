@@ -3,9 +3,9 @@ import "./App.css";
 import FirstComponent from "./components/imagedisplay";
 import { AnalyzeFacialData } from "./features/AnalyzeFacialData";
 import { NavBar } from "./navbar/navbar";
-import { AvailableFeatures } from "./Types";
+import { AvailableFeatures } from "./types/Types";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FaceFeatures } from "./features/VerifyFacial";
+import { FaceFeatures } from "./features/verify/VerifyFacial";
 
 function App() {
   const [currentSelectedFeature, setCurrentSelectedFeature] =

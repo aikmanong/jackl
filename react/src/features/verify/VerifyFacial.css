@@ -1,0 +1,25 @@
+.verified {
+  border: 5px solid rgba(0, 256, 0, 0.75);
+}
+
+.not-verified {
+  border: 5px solid rgba(256, 0, 0, 0.75);
+}
+
+.loading,
+.loading-error {
+  border: 5px solid rgba(82, 74, 74, 0.75);
+}
+
+.verify-facial-image-container {
+  height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+}
+
+.verify-facial-image-container img {
+  height: 100%;
+  object-fit: contain;
+  width: 50%;
+}
