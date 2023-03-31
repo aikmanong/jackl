@@ -1,0 +1,45 @@
+.box-drag_drop{
+   color:black; 
+   border: 1px solid blue;
+   margin: 20px;
+   padding-bottom: 20px;
+   height: 200px;
+  width: 100%;
+  align-self: center;
+}
+
+.box-drag_drop img{
+    height: 100px;
+    width: 100px;
+} 
+
+.box-drag_drop .border-red-500{
+    border: 1px solid red;  
+    margin: 20px;
+    height: 200px;
+    width: 50%;
+    align-self: center;
+    color:black; 
+}
+/* 
+.box-drag_drop .border-green-500{
+    border: 1px solid green;  
+    margin: 20px;
+    height: 200px;
+    width: 50%;
+    align-self: center;
+    color:black; 
+}  */
+
+.sorry_red{
+    border: 1px solid red; 
+}
+
+.uploadedImg{
+    height: 100px;
+    width: 100px;
+}
+
+.onlyJpegPngText{
+    padding-bottom: 10px;
+}

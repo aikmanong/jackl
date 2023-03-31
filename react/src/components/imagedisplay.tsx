@@ -6,6 +6,7 @@ import { celebrities } from "./modal/facedisplay";
 // import { convertUrlToBase64 } from "./converturl";
 import { resolve } from "node:path/win32";
 import { rejects } from "node:assert";
+import Dropzone from "./modal/dropzone";
 
 export default function FirstComponent() {
   // const [changePhoto, setChangePhoto] = useState("");
@@ -13,6 +14,8 @@ export default function FirstComponent() {
   const [urlTo64, setUrlTo64] = useState("");
   const [image, setImage] = useState(celebrities[0]);
   const isMounted = useRef(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
 
   const handleClick = (celebrity: Celebrity) => {
     console.log(celebrity.id, celebrity.img);
@@ -45,32 +48,48 @@ export default function FirstComponent() {
       );
 
   useEffect(() => {
-    if (isMounted.current){
-    urlToBase64(celeb.img).then((base64) => {
-      // console.log("Result:", base64);
-      fetch(ANALYZE_POST_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          img: 
-          [
-            {
-              img1:base64,
-              img2:base64,
-            }
-          ] 
-        }),
-      }).then((response) => {
-        response.json().then((data) => {
-          setImage(data.instance_1);
+    if (isMounted.current) {
+      urlToBase64(celeb.img).then((base64) => {
+        // console.log("Result:", base64);
+        fetch(ANALYZE_POST_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            img: [
+              {
+                img1: base64,
+                img2: base64,
+              },
+            ],
+          }),
+        }).then((response) => {
+          response.json().then((data) => {
+            setImage(data.instance_1);
+          });
         });
       });
-    });} else {
+    } else {
       isMounted.current = true;
     }
-  }, [celeb]);
+  }, [celeb]); //second argument is depedency array , when ever variable is change then useeffect is triggered
 
-  //convert image to base64 manually
+  useEffect(() => {
+    //run when [file] changes
+    const reader = new FileReader();
+
+    reader.addEventListener(
+      "load",
+      () => {
+        setPreview(reader.result as string);
+      },
+      false
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }, [file]);
+  //set the reult of the reader as my preview value
 
   return (
     <div>
@@ -78,7 +97,6 @@ export default function FirstComponent() {
         <h3>{celeb.text}</h3>
         <img src={celeb.img} alt="image" width="200px" height="300px" />
       </div>
-
       <br></br>
       <Modal onImageSelect={handleClick} />
     </div>
