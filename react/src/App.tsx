@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-import FirstComponent from "./components/imagedisplay";
-import { AnalyzeFacialData } from "./features/AnalyzeFacialData";
+import { ImageDisplay } from "./features/picturePicker/ImageDisplay";
+import { AnalyzeFacialData } from "./features/analyze/AnalyzeFacialData";
 import { NavBar } from "./navbar/navbar";
 import { AvailableFeatures } from "./types/Types";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -23,7 +23,7 @@ function App() {
           handleFeatureChange={handleFeatureChange}
         />
       </header>
-      <FirstComponent />
+      <ImageDisplay />
 
       {currentSelectedFeature === "analyze" && <AnalyzeFacialData />}
       {currentSelectedFeature === "verify" && <FaceFeatures />}

@@ -1,17 +1,13 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import Dropzone from "../modal/dropzone";
+import Dropzone from "./dropzone/Dropzone";
 
-//celebrity with "export" can be imported
-//C in celeb is capital bc it's a custom type and complex type ( not primitive (object))
-export interface Celebrity {
+export interface ICelebrity {
   id: number;
   img: string;
   text: string | undefined;
 }
-
-//prevents strings, incomplete objects in the array
-export const celebrities: Celebrity[] = [
+export const celebrities: ICelebrity[] = [
   {
     id: 1,
     img: "https://assets.vogue.com/photos/6226846b921b9eb00286c6ea/master/pass/GettyImages-77731940.jpg",
@@ -35,16 +31,14 @@ export const celebrities: Celebrity[] = [
 ];
 
 interface Props {
-  //()=> void specify the function and what it will return, void means no return value
-  onClick: (celebrity: Celebrity) => void;
+  onClick: (celebrity: ICelebrity) => void;
 }
 
-export default function FaceDisplay({ onClick }: Props) {
+export const FaceDisplay = ({ onClick }: Props) => {
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
 
   useEffect(() => {
-    //run when [file] changes
     const previewPromises = [];
     for (let i = 0; i < files.length; i++) {
       previewPromises.push(
@@ -53,13 +47,11 @@ export default function FaceDisplay({ onClick }: Props) {
           reader.addEventListener(
             "load",
             () => {
-              //want promise to resolve once I have image converted
               resolve(reader.result as string);
             },
             false
           );
           reader.readAsDataURL(files[i]);
-
         })
       );
     }
@@ -68,14 +60,9 @@ export default function FaceDisplay({ onClick }: Props) {
     });
   }, [files]);
 
-
   const allFilesUploaded = (uploadedFiles: File[]) => {
-    setFiles ((previousFiles) => ([...previousFiles, ...uploadedFiles]))
-  }
-
-  //setter function with new value and callback
-  //callback(all in blue parenth) 1st argument is the previous value of that state (previousFiles)
-  //callback makes sure previous files updated to have new values 
+    setFiles((previousFiles) => [...previousFiles, ...uploadedFiles]);
+  };
 
   return (
     <table>
@@ -91,29 +78,27 @@ export default function FaceDisplay({ onClick }: Props) {
           </tr>
         ))}
         {files?.map((file, index) => (
-          
-            <tr key={index}>
-              <td>
-                {previews === null ? (
-                  ""
-                ) : (
-                  <button
-                    onClick={() =>
-                      onClick({ id: 0, img: previews[index], text: file.name })
-                    }
-                  >
-                    {" "}
-                    <img
-                      className="uploadedImg"
-                      src={previews[index]}
-                      alt={file.name}
-                    />
-                  </button>
-                )}{" "}
-              </td>
-              <td>{file.name}</td>
-            </tr>
-          
+          <tr key={index}>
+            <td>
+              {previews === null ? (
+                ""
+              ) : (
+                <button
+                  onClick={() =>
+                    onClick({ id: 0, img: previews[index], text: file.name })
+                  }
+                >
+                  {" "}
+                  <img
+                    className="uploadedImg"
+                    src={previews[index]}
+                    alt={file.name}
+                  />
+                </button>
+              )}{" "}
+            </td>
+            <td>{file.name}</td>
+          </tr>
         ))}
 
         <tr>
@@ -124,4 +109,4 @@ export default function FaceDisplay({ onClick }: Props) {
       </tbody>
     </table>
   );
-}
+};
