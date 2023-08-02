@@ -25,3 +25,9 @@ export interface FindFaceDetails {
   third_distance: number;
   third_image: string;
 }
+export type currentLoadingState =
+  | "not-loading"
+  | "loading"
+  | "loading-error"
+  | "not-verified"
+  | "verified";
