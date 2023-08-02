@@ -1,9 +1,9 @@
 export interface IFacialDataProps {
-    age: number;
-    dominant_emotion: string | undefined;
-    gender: string | undefined;
-    dominant_race: string | undefined;
-  }
+  age: number;
+  dominant_emotion: string | undefined;
+  gender: string | undefined;
+  dominant_race: string | undefined;
+}
 
 export type AvailableFeatures =
   | "home"
@@ -13,5 +13,15 @@ export type AvailableFeatures =
   | "streaming";
 
 export interface FacialDetails {
-    verified: string
-  }
+  verified: string;
+}
+
+//New Type for Distance
+export interface FindFaceDetails {
+  first_distance: number;
+  first_image: string;
+  second_distance: number;
+  second_image: string;
+  third_distance: number;
+  third_image: string;
+}
