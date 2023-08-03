@@ -316,7 +316,7 @@ def find():
     resp_obj["trx_id"] = str(trx_id)
     resp_obj["seconds"] = toc - tic
     # Get the list of closest images and distances from the findWrapper function
-    resp_obj["distance_data"] = closest_images
+    resp_obj["distance_data"] = closest_images    
 
     # Store the distances in the resp_obj dictionary
     if closest_images:
