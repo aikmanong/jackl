@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { convertImgToBase64String } from "../../utils/utils";
 import { IFacialDataProps } from "../../types/Types";
-import "./AnalyzeFacialData.css";
+import { Spotify } from "../spotify/Spotify";
 
 const defaultFacialData: IFacialDataProps = {
   age: 0,
@@ -11,8 +11,6 @@ const defaultFacialData: IFacialDataProps = {
 };
 
 const ANALYZE_POST_URL = "http://localhost:8000/analyze";
-
-//On ClickFunction
 
 export const AnalyzeFacialData = () => {
   const [imgBinaryString, setImgBinaryString] = useState("");
@@ -51,6 +49,10 @@ export const AnalyzeFacialData = () => {
         <p>{`gender: ${facialData.gender}`}</p>
         <p>{`dominant race: ${facialData.dominant_race}`}</p>
       </div>
+      <br />
+      <br />
+      <br />
+      <Spotify emotion={facialData.dominant_emotion} />
     </>
   );
 };
