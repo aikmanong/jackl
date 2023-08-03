@@ -1,0 +1,4 @@
+ identity source_x source_y source_w source_h VGG-Face_cosine
+0 /deepface/database/ken_jeong/Ken_Jeong_on_Sidewalks_(cropped).jpg 233 39 104 104 0.09054709658215898
+1 /deepface/database/ken_jeong/ken_jeong1.jpg 233 39 104 104 0.3827210290465556
+2 /deepface/database/jackie_chan/JackChan.jpg 233 39 104 104 0.3877967433005409
