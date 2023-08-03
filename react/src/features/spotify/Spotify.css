@@ -1,0 +1,14 @@
+.spotify-search-container {
+  height: 400px;
+  overflow-y: auto;
+}
+
+.song-container {
+  align-items: center;
+  display: flex;
+  white-space: pre-wrap;
+}
+
+.song-container img {
+  margin-right: 10px;
+}
