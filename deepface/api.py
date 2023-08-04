@@ -300,43 +300,17 @@ def encode_base_64(file_path):
 def find():
     global graph
 
-    tic = time.time()
     req = request.get_json()
-    trx_id = uuid.uuid4()
 
     if tf_version == 1:
         with graph.as_default():
-            closest_images = findWrapper(req)
+            closest_images = findClosestDistances(req)
     elif tf_version == 2:
-        closest_images = findWrapper(req)
+        closest_images = findClosestDistances(req)  
 
-    toc = time.time()
+    return closest_images, 200
 
-    resp_obj = dict()
-    resp_obj["trx_id"] = str(trx_id)
-    resp_obj["seconds"] = toc - tic
-    # Get the list of closest images and distances from the findWrapper function
-    resp_obj["distance_data"] = closest_images    
-
-    # Store the distances in the resp_obj dictionary
-    if closest_images:
-        first_distance = closest_images["closest_distance"][0]
-        first_image = closest_images["closest_image"][0]
-        second_distance = closest_images["second_distance"][0]
-        second_image = closest_images["second_image"][0]
-        third_distance = closest_images["third_distance"][0]
-        third_image = closest_images["third_image"][0]
-
-    resp_obj["first_distance"] = first_distance
-    resp_obj["first_image"] = encode_base_64(first_image)
-    resp_obj["second_distance"] = second_distance
-    resp_obj["second_image"] = encode_base_64(second_image)
-    resp_obj["third_distance"] = third_distance
-    resp_obj["third_image"] = encode_base_64(third_image)
-
-    return resp_obj, 200
-
-def findWrapper(req):
+def findClosestDistances(req):
     database = '/deepface/database'
     user_img = req.get("img")
 
@@ -384,14 +358,11 @@ def findWrapper(req):
             third_min_image = df.loc[i, "identity"]
 
     #Create dictionary to store all the data 
-    distance_data = {
-        "closest_distance" : [min_distance],
-        "closest_image" : [min_image],
-        "second_distance" : [sec_min_distance],
-        "second_image" : [sec_min_image],
-        "third_distance" : [third_min_distance],
-        "third_image" : [third_min_image],
-    }
+    distance_data = [
+        {"distance" : min_distance, "image" : encode_base_64(min_image)},
+        {"distance" : sec_min_distance, "image" : encode_base_64(sec_min_image)},
+        {"distance" : third_min_distance, "image" : encode_base_64(third_min_image)},
+    ]
 
     return distance_data
 

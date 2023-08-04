@@ -18,12 +18,8 @@ export interface FacialDetails {
 
 //New Type for Distance
 export interface FindFaceDetails {
-  first_distance: number;
-  first_image: string;
-  second_distance: number;
-  second_image: string;
-  third_distance: number;
-  third_image: string;
+  distance: number;
+  image: string;
 }
 export type currentLoadingState =
   | "not-loading"
