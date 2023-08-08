@@ -5,6 +5,7 @@ import { NavBar } from "./navbar/navbar";
 import { AvailableFeatures } from "./types/Types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaceFeatures } from "./features/verify/VerifyFacial";
+import { FindFace } from "./features/finding_face_in_image/FindingFace";
 
 function App() {
   const [currentSelectedFeature, setCurrentSelectedFeature] =
@@ -24,6 +25,7 @@ function App() {
       </header>
       {currentSelectedFeature === "analyze" && <AnalyzeFacialData />}
       {currentSelectedFeature === "verify" && <FaceFeatures />}
+      {currentSelectedFeature === "find" && <FindFace />}
     </div>
   );
 }

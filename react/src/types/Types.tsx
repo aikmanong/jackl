@@ -16,6 +16,11 @@ export interface FacialDetails {
   verified: string;
 }
 
+//New Type for Distance
+export interface FindFaceDetails {
+  distance: number;
+  image: string;
+}
 export type currentLoadingState =
   | "not-loading"
   | "loading"

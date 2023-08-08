@@ -1,0 +1,3 @@
+1st min image name:/deepface/database/ken_jeong/Ken_Jeong_on_Sidewalks_(cropped).jpg min distance:0.09054709658215898
+2nd min image name:/deepface/database/ken_jeong/ken_jeong1.jpg min distance:0.3827210290465556
+3rd min image name:/deepface/database/jackie_chan/JackChan.jpg min distance:0.3877967433005409
