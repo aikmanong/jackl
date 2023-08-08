@@ -31,9 +31,7 @@ export const FindFace = () => {
         .then((response) => response.json())
         .then((data: FindFaceDetails[]) => {
           // Set the state with the response data
-          setFindData({
-            ...data,
-          });
+          setFindData(data);
         })
         // Console if there is an error
         .catch((error) => {
@@ -49,15 +47,13 @@ export const FindFace = () => {
       <input onInput={uploadImageCallback} type="file" />
       {findData && (
         <div>
-          <img src={imgFind}></img>
-          <p>{`Closest Distance: ${findData[0].distance}`}</p>
-          <img src={findData[0].image}></img>
-
-          <p>{`Second Distance: ${findData[1].distance}`}</p>
-          <img src={findData[1].image}></img>
-
-          <p>{`Third Distance: ${findData[2].distance}`}</p>
-          <img src={findData[2].image}></img>
+          <img src={imgFind} />
+          {findData.map((item, index) => (
+            <div key={index}>
+              <p>{`Distance: ${item.distance}`}</p>
+              <img src={item.image} />
+            </div>
+          ))}
         </div>
       )}
     </>

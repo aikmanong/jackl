@@ -322,48 +322,25 @@ def findClosestDistances(req):
 
     df.to_csv(r'/deepface/find.csv', sep=' ', mode='w')
 
-    #Finding minimum distance of an image 
-    min_distance = df.loc[0, "VGG-Face_cosine"]
-    min_image = df.loc[0, "identity"]
+    #Dyanmic array to store the image and their respective distance
+    distance_data = []
 
-    #2nd minimum distance of an image
-    sec_min_distance = float('inf')
-    sec_min_image = ""
-                           
-    #3rd minimum distance of an image
-    third_min_distance = float('inf')
-    third_min_image = ""
+    #A variable to set the threshold of the maximum distance when comparing the images 
+    distance_threshold = 0.4
 
-    for i in range(1, len(df)):
+    #Loop through the database and compare images
+    for i in range(0, len(df)):
         distance = df.loc[i, "VGG-Face_cosine"]
-        #If distance is less than min_distance, set min_distance to the distance and shift the sec and third min distance
-        if distance < min_distance:
-            third_min_distance = sec_min_distance
-            third_min_image = sec_min_image
-            sec_min_distance = min_distance
-            sec_min_image = min_image
-            min_distance = distance
-            min_image = df.loc[i, "identity"]
 
-        #Else If distance is less than second distance, set sec_distance to distance and shift third min 
-        elif distance < sec_min_distance:
-            third_min_distance = sec_min_distance
-            third_min_image = sec_min_image
-            sec_min_distance = distance
-            sec_min_image = df.loc[i, "identity"]
+        #If the calculated distance is less than the threshold, add it to the array
+        if distance < distance_threshold:
+            # Append the related image to the distance_data list
+            distance_data.append({"distance": distance, "image": encode_base_64(df.loc[i, "identity"])})
 
-        #Else If distance is less than third distance, set third_distance to distance  
-        elif distance < third_min_distance:
-            third_min_distance = distance
-            third_min_image = df.loc[i, "identity"]
+    #Sort the array in ascending order
+    distance_data.sort(key=lambda x: x["distance"])
 
-    #Create dictionary to store all the data 
-    distance_data = [
-        {"distance" : min_distance, "image" : encode_base_64(min_image)},
-        {"distance" : sec_min_distance, "image" : encode_base_64(sec_min_image)},
-        {"distance" : third_min_distance, "image" : encode_base_64(third_min_image)},
-    ]
-
+    #Return the dynamic array 
     return distance_data
 
 #------------------------------- End Here 
